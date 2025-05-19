@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Ejercicios</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- MathJax para mostrar fórmulas matemáticas correctamente -->
+    <script type="text/javascript" async 
+        src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async 
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Portfolio de Simulación - 3.º Multimedia</h1>
+        <p>Una recopilación amena de ejercicios y practicas de la asignatura</p>
+    </header>
+
+    <nav class="indice">
+        <h2>Índice de Contenidos</h2>
+        <ul>
+            <li><a href="#tema1">Tema 1 - Conceptos basicos e Integradores Numericos</a>
+            <ul>
+                <li><a href="#t1ejer1">Ejercicio 1: Montaña Rusa</a></li>
+                <li><a href="#t1ejer2">Ejercicio 2: Caída de un Paracaidista</a></li>
+                <li><a href="#t1ejer3">Ejercicio 3: Integración Numérica de una Ecuación Diferencial</a></li>
+                <li><a href="#t1ejer4">Ejercicio 4: Movimiento Circular con Cinemática Angular</a></li>
+                <li><a href="#t1ejer5">Ejercicio 5: Movimiento Armónico Simple y Combinación de Frecuencias</a></li>
+                <li><a href="#t1ejer6">Ejercicio 6: Bubble Shooter con Vectores</a></li>
+                <li><a href="#t1ejer7">Ejercicio 7: Dinámica de una Partícula con Fuerzas</a></li>
+                <li><a href="#t1ejer8">Ejercicio 8: Métodos RK2 y RK4 para la integración numérica</a></li>
+                <li><a href="#pr1">Practica 1: Sistema de 4 muelles acoplados</a></li>
+            </ul>
+            </li>
+            <li><a href="#tema2">Tema 2: Simulacion de partculas</a>
+            <ul>
+                <li><a href="#t2ejer1">Ejercicio 1: Emisor de Cohetes Pirotécnicos</a></li>
+                <li><a href="#t2ejer2">Ejercicio 2: Cohetes con Explosión Elíptica</a></li>
+                <li><a href="#t2ejer3">Ejercicio 3: Explosión de Partículas</a></li>
+                <li><a href="#t2ejer4">Ejercicio 4: Fuente de Agua</a></li>
+                <li><a href="#t2ejer5">Ejercicio 5: Emisor de Humo</a></li>
+                <li><a href="#t2ejer6">Ejercicio 6: Partícula Flotante</a></li>
+                <li><a href="#t2ejer7">Ejercicio 7:  Emisor de Spray Horizontal</a></li>
+                <li><a href="#pr2">Practica 2: Fuente de Agua 2D con Sistema de Partículas</a></li>
+                <li><a href="#pr3ejer1">Practica 3 Ejercicio 1: Billar Francés</a></li>
+                <li><a href="#pr3ejer2">Practica 3 Ejercicio 2: Fluido con Colisiones Optimizada (Grid y Hash)</a></li>
+            </ul>
+            </li>
+            <li><a href="#tema3">Tema 3: Simulacion de Objetos Deformables</a>
+            <ul>
+                <li><a href="#t3ejer1">Ejercicio 1: Cuerda con Sistema Masa-Muelle</a></li>
+                <li><a href="#t3ejer2">Ejercicio 2: Pelo con Sistema Masa-Muelle</a></li>
+                <li><a href="#t3ejer3">Ejercicio 3: Simulación de Banderas con Fuerzas Externas</a></li>
+                <li><a href="#t3ejer4">Ejercicio 4: Colisión entre una Esfera y una Malla Deformable</a></li>
+                <li><a href="#pr4ejer1">Practica 4 Ejercicio 1: Cubo Deformable con Colisiones</a></li>
+                <li><a href="#pr4ejer2">Practica 4 Ejercicio 2: Ondas Oceánicas</a></li>
+            </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <main>
+        
+        <section id="tema1">
+            <!-- Sección del ejercicio de la Montaña Rusa -->
+            <section class="ejercicio" id="t1ejer1">
+            <h2>Ejercicio 1: Simulación de una Montaña Rusa</h2>
+            <p>
+                En este ejercicio, se ha desarrollado una simulación en <strong>Processing</strong> en la que una partícula sigue una serie de 
+                tramos generados automáticamente, representando el recorrido de una montaña rusa. La partícula avanza a través de los tramos 
+                con una velocidad específica hasta completar el recorrido, momento en el cual la simulación se reinicia para generar un nuevo 
+                circuito aleatorio.
+            </p>
+
+            <h3>Fundamentos Matemáticos</h3>
+
+            <p><strong>1. Generación de Puntos</strong></p>
+            <p>
+                La carretera está formada por \( n_{\text{tramos}} \) puntos, distribuidos equidistantemente en el eje \( x \), mientras que 
+                su coordenada \( y \) se genera de manera aleatoria dentro de los límites de la pantalla.
+            </p>
+            <p>
+                La posición de cada punto \( P_i \) se define por:
+            </p>
+            <p>
+                \[
+                x_i = \frac{i}{n_{\text{tramos}} - 1} \cdot W, \quad y_i = \text{random}(0, H)
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( x_i \): posición en el eje horizontal.</li>
+                    <li>\( y_i \): posición en el eje vertical.</li>
+                    <li>\( W \): ancho total del área de simulación.</li>
+                    <li>\( H \): altura máxima permitida para la carretera.</li>
+                </ul>
+            </p>
+
+            <p><strong>2. Cálculo de Velocidades</strong></p>
+            <p>
+                Cada tramo tiene una dirección determinada por la diferencia entre el punto inicial y el punto final del tramo:
+            </p>
+            <p>
+                \[
+                \vec{d_i} = P_{i+1} - P_i
+                \]
+            </p>
+            <p>
+                Para convertir este vector en un vector unitario, se normaliza dividiéndolo entre su magnitud:
+            </p>
+            <p>
+                \[
+                \hat{d_i} = \frac{\vec{d_i}}{\|\vec{d_i}\|}
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( \vec{d_i} \) es el vector dirección del tramo.</li>
+                    <li>\( \hat{d_i} \) es el vector unitario que indica la dirección normalizada.</li>
+                </ul>
+            </p>
+            <p>
+                La velocidad de la partícula en cada tramo es proporcional a este vector unitario, escalada por una magnitud aleatoria:
+            </p>
+            <p>
+                \[
+                \vec{v_i} = \hat{d_i} \cdot v_{\text{módulo}}
+                \]
+            </p>
+            <p>
+                donde \( v_{\text{módulo}} \) es un valor aleatorio en un rango determinado para simular diferentes velocidades en distintos tramos.
+            </p>
+
+            <p><strong>3. Movimiento de la Partícula</strong></p>
+            <p>
+                La posición de la partícula en el tiempo \( t \) se actualiza en cada iteración de la simulación usando la ecuación:
+            </p>
+            <p>
+                \[
+                P(t) = P_{\text{actual}} + \vec{v} \cdot \Delta t
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( P(t) \) es la nueva posición en el instante \( t \).</li>
+                    <li>\( P_{\text{actual}} \) es la posición de la partícula antes de actualizarse.</li>
+                    <li>\( \vec{v} \) es la velocidad de la partícula en el tramo actual.</li>
+                    <li>\( \Delta t \) es el paso de tiempo de la simulación.</li>
+                </ul>
+            </p>
+            <p>
+                Para asegurarnos de que la partícula pase por cada punto y no lo sobrepase debido a la velocidad, se verifica si la distancia 
+                al siguiente punto es menor que la distancia que avanzará en el siguiente paso:
+            </p>
+            <p>
+                \[
+                \| P_{\text{actual}} - P_{i+1} \| \leq \|\vec{v_i} \cdot \Delta t \|
+                \]
+            </p>
+
+            <p><strong>4. Reinicio de la Simulación</strong></p>
+            <p>
+                Cuando la partícula alcanza el último tramo de la montaña rusa, la simulación se reinicia para generar una nueva estructura aleatoria.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/cWG5fK72i1s" 
+                    title="Simulación de Montaña Rusa en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer2">
+            <h2>Ejercicio 2: Simulación de la Caída de un Paracaidista</h2>
+            <p>
+                En este ejercicio, se ha modelado la caída de un paracaidista utilizando métodos numéricos para resolver la ecuación diferencial de su movimiento. Se comparan diferentes métodos de integración para analizar la precisión y estabilidad de cada uno.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Aceleración gravitatoria (\( g \))</td>
+                    <td>9.80 m/s²</td>
+                </tr>
+                <tr>
+                    <td>Masa del paracaidista (\( m \))</td>
+                    <td>60.00 kg</td>
+                </tr>
+                <tr>
+                    <td>Coeficiente de arrastre (\( c \))</td>
+                    <td>80.00 kg/s</td>
+                </tr>
+                <tr>
+                    <td>Paso de tiempo (\( dt \))</td>
+                    <td>0.10 s</td>
+                </tr>
+                <tr>
+                    <td>Condición inicial (\( v_0 \))</td>
+                    <td>0.00 m/s</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La ecuación diferencial que describe la velocidad del paracaidista bajo la acción de la gravedad y la resistencia del aire es:
+            </p>
+            <p>
+                \[
+                \frac{dv}{dt} = g - \frac{c}{m} v
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( v \) es la velocidad del paracaidista.</li>
+                    <li>\( g \) es la aceleración gravitatoria.</li>
+                    <li>\( c \) es el coeficiente de arrastre del aire.</li>
+                    <li>\( m \) es la masa del paracaidista.</li>
+                </ul>
+            </p>
+
+            <h3>Métodos Numéricos Aplicados</h3>
+            <p>
+                Se han utilizado tres métodos numéricos para aproximar la solución de la ecuación diferencial:
+            </p>
+
+            <p><strong>1. Método de Euler Explícito</strong></p>
+            <p>
+                El método de Euler explícito estima la velocidad en el siguiente paso como:
+            </p>
+            <p>
+                \[
+                v_{n+1} = v_n + \Delta t \cdot \left( g - \frac{c}{m} v_n \right)
+                \]
+            </p>
+
+            <p><strong>2. Método Semi-implícito</strong></p>
+            <p>
+                Este método mejora la estabilidad de Euler explícito al actualizar primero la aceleración y luego la velocidad:
+            </p>
+            <p>
+                \[
+                v_{n+1} = v_n + \Delta t \cdot \left( g - \frac{c}{m} v_{n+1} \right)
+                \]
+            </p>
+
+            <p><strong>3. Método de Heun (RK2)</strong></p>
+            <p>
+                Este método mejora la precisión utilizando un predictor y un corrector:
+            </p>
+            <p>
+                \[
+                v_{\text{pred}} = v_n + \Delta t \cdot \left( g - \frac{c}{m} v_n \right)
+                \]
+            </p>
+            <p>
+                \[
+                v_{n+1} = v_n + \frac{\Delta t}{2} \cdot \left[ \left( g - \frac{c}{m} v_n \right) + \left( g - \frac{c}{m} v_{\text{pred}} \right) \right]
+                \]
+            </p>
+
+            <h3>Resultados y Comparación</h3>
+            <p>
+                Se han comparado las soluciones numéricas con la solución real del problema, obteniendo los siguientes resultados:
+            </p>
+            <ul>
+                <li><strong>Euler Explícito:</strong> Método simple, pero con errores acumulativos significativos.</li>
+                <li><strong>Semi-implícito:</strong> Mayor estabilidad que Euler, pero sigue teniendo desviaciones.</li>
+                <li><strong>Heun (RK2):</strong> Mayor precisión, ya que corrige la estimación en cada paso.</li>
+            </ul>
+
+            <h3>Visualización</h3>
+            <div class="image-container">
+                <img src="images/montañaRusa.png" alt="Gráfica de la simulación del paracaidista" width="600">
+            </div>
+
+            <p>
+                La gráfica muestra la evolución de la velocidad del paracaidista a lo largo del tiempo, comparando los diferentes métodos numéricos con la solución real.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer3">
+            <h2>Ejercicio 3: Integración Numérica de una Ecuación Diferencial</h2>
+            <p>
+                En este ejercicio se ha resuelto numéricamente la ecuación diferencial mediante diferentes métodos, comparando sus resultados con la solución exacta.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Ecuación diferencial</td>
+                    <td>\(\frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5\)</td>
+                </tr>
+                <tr>
+                    <td>Rango de integración</td>
+                    <td>\(x = 0\) a \(x = 4\)</td>
+                </tr>
+                <tr>
+                    <td>Paso de integración (\(dt\))</td>
+                    <td>0.50</td>
+                </tr>
+                <tr>
+                    <td>Condición inicial</td>
+                    <td>\( y(0) = 1 \)</td>
+                </tr>
+                <tr>
+                    <td>Solución exacta</td>
+                    <td>\( y = -0.5x^4 + 4x^3 - 10x^2 + 8.5x + 1 \)</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La ecuación diferencial que describe el sistema es:
+            </p>
+            <p>
+                \[
+                \frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5
+                \]
+            </p>
+            <p>
+                La solución exacta de esta ecuación, que utilizaremos para calcular el error en los métodos numéricos, es:
+            </p>
+            <p>
+                \[
+                y = -0.5x^4 + 4x^3 - 10x^2 + 8.5x + 1
+                \]
+            </p>
+
+            <h3>Métodos Numéricos Aplicados</h3>
+            <p>
+                Se han implementado tres métodos numéricos para resolver la ecuación diferencial:
+            </p>
+
+            <p><strong>1. Método de Euler Explícito</strong></p>
+            <p>
+                Se basa en la fórmula:
+            </p>
+            <p>
+                \[
+                y_{n+1} = y_n + \Delta t \cdot f(x_n, y_n)
+                \]
+            </p>
+            <p>
+                donde \( f(x, y) \) es la ecuación diferencial evaluada en \( x_n, y_n \).
+            </p>
+
+            <p><strong>2. Método Semi-implícito</strong></p>
+            <p>
+                Este método introduce una corrección en el cálculo de \( y_{n+1} \), mejorando la estabilidad del método de Euler:
+            </p>
+            <p>
+                \[
+                y_{n+1} = y_n + \Delta t \cdot f(x_{n+1}, y_{n+1})
+                \]
+            </p>
+
+            <p><strong>3. Método de Heun (RK2)</strong></p>
+            <p>
+                También conocido como método del punto medio, mejora la precisión utilizando una aproximación intermedia:
+            </p>
+            <p>
+                \[
+                y_{\text{pred}} = y_n + \Delta t \cdot f(x_n, y_n)
+                \]
+            </p>
+            <p>
+                \[
+                y_{n+1} = y_n + \frac{\Delta t}{2} \left[ f(x_n, y_n) + f(x_{n+1}, y_{\text{pred}}) \right]
+                \]
+            </p>
+
+            <h3>Resultados y Comparación</h3>
+            <p>
+                Se han comparado los valores obtenidos con los diferentes métodos numéricos respecto a la solución exacta, evaluando también el error cometido en cada aproximación.
+            </p>
+            <ul>
+                <li><strong>Euler Explícito:</strong> Método simple pero con errores acumulativos notables.</li>
+                <li><strong>Semi-implícito:</strong> Mayor estabilidad, aunque sigue presentando desviaciones.</li>
+                <li><strong>Heun (RK2):</strong> Mayor precisión gracias a la corrección en cada paso.</li>
+            </ul>
+
+            <h3>Visualización</h3>
+            <div class="image-container">
+                <img src="images/ejer_pag29.png" alt="Gráfica de integración numérica" width="600">
+            </div>
+
+            <p>
+                La gráfica muestra la evolución de la solución numérica en comparación con la solución exacta, permitiendo visualizar el error cometido en cada método.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer4">
+            <h2>Ejercicio 4: Movimiento Circular con Cinemática Angular</h2>
+            <p>
+                En este ejercicio se ha simulado el movimiento de una bola alrededor de un punto fijo a una distancia \( r \), completando <strong>una vuelta por segundo</strong>. Para ello, se han aplicado los conceptos de cinemática angular.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Radio del movimiento (\( r \))</td>
+                    <td>100 píxeles</td>
+                </tr>
+                <tr>
+                    <td>Periodo (\( T \))</td>
+                    <td>1 segundo</td>
+                </tr>
+                <tr>
+                    <td>Frecuencia (\( f \))</td>
+                    <td>\( \frac{1}{T} = 1 \) Hz</td>
+                </tr>
+                <tr>
+                    <td>Velocidad angular (\( w \))</td>
+                    <td>\( w = 2\pi f = \frac{2\pi}{T} \)</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La velocidad angular \( w \) se define como:
+            </p>
+            <p>
+                \[
+                w = \frac{\Delta \theta}{\Delta t} = \frac{2\pi}{T}
+                \]
+            </p>
+            <p>
+                La posición de la bola en cada instante de tiempo se obtiene con las ecuaciones paramétricas:
+            </p>
+            <p>
+                \[
+                x(t) = r \cdot \cos(w \cdot t)
+                \]
+            </p>
+            <p>
+                \[
+                y(t) = r \cdot \sin(w \cdot t)
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( x, y \) son las coordenadas de la bola en cada instante.</li>
+                    <li>\( r \) es la distancia fija al centro de rotación.</li>
+                    <li>\( w \) es la velocidad angular.</li>
+                    <li>\( t \) es el tiempo transcurrido desde el inicio del movimiento.</li>
+                </ul>
+            </p>
+
+            <h3>Implementación en Processing</h3>
+            <p>
+                Se ha implementado este modelo en <strong>Processing</strong>, asegurando que la animación sea fluida y precisa. Se utiliza la función `frameRate(60)` para garantizar que la actualización del tiempo sea precisa, manteniendo una vuelta por segundo.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/4G4E-cztotQ" 
+                    title="Simulación de Montaña Rusa en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <p>
+                La imagen muestra el <strong>movimiento circular de la bola</strong>, siguiendo las ecuaciones paramétricas. Se observa cómo la trayectoria es una circunferencia perfecta con un desplazamiento uniforme en el tiempo.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer5">
+            <h2>Ejercicio 5: Movimiento Armónico Simple y Combinación de Frecuencias</h2>
+            <p>
+                En este ejercicio se ha simulado el movimiento de una partícula siguiendo una <strong>combinación de oscilaciones armónicas</strong>, 
+                donde la posición en el eje \( y \) depende de la suma de dos funciones seno con frecuencias cercanas.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Frecuencia 1 (\( f_1 \))</td>
+                    <td>3 Hz</td>
+                </tr>
+                <tr>
+                    <td>Frecuencia 2 (\( f_2 \))</td>
+                    <td>3.5 Hz</td>
+                </tr>
+                <tr>
+                    <td>Amplitud (\( A \))</td>
+                    <td>50 píxeles</td>
+                </tr>
+                <tr>
+                    <td>Velocidad en \( x \) (\( v \))</td>
+                    <td>2 píxeles por fotograma</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La partícula se mueve con velocidad constante en el eje \( x \), mientras que su posición en \( y \) sigue la ecuación:
+            </p>
+            <p>
+                \[
+                y(x) = 0.5 \sin(3x) + 0.5 \sin(3.5x)
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( x \) es la posición horizontal de la partícula.</li>
+                    <li>\( y(x) \) es la posición vertical determinada por la suma de las funciones seno.</li>
+                    <li>\( 3x \) y \( 3.5x \) representan las frecuencias de las ondas.</li>
+                </ul>
+            </p>
+
+            <h3>Implementación en Processing</h3>
+            <p>
+                Se ha implementado este modelo en <strong>Processing</strong>, asegurando que la animación sea fluida y que la partícula se mueva a través del lienzo con un comportamiento oscilatorio definido por la combinación de ondas.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/wCNLhTYLoc4" 
+                    title="Simulación de Montaña Rusa en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <p>
+                El video muestra el <strong>movimiento oscilatorio de la partícula</strong>, evidenciando la interacción de las dos frecuencias y su efecto en la trayectoria final.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer6">
+            <h2>Ejercicio 6: Bubble Shooter con Vectores</h2>
+            <p>
+                En este ejercicio se ha desarrollado un <strong>lanzador de bolas con velocidad constante</strong>, donde cada bola es disparada en dirección al clic del usuario y se mueve siguiendo un vector de velocidad calculado dinámicamente.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Posición de origen (\( x_0, y_0 \))</td>
+                    <td>Centro inferior de la pantalla</td>
+                </tr>
+                <tr>
+                    <td>Velocidad de las bolas (\( v \))</td>
+                    <td>5 píxeles por fotograma</td>
+                </tr>
+                <tr>
+                    <td>Dirección</td>
+                    <td>Hacia la posición del clic</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La dirección del disparo se calcula como un <strong>vector unitario normalizado</strong> desde el punto de origen hasta el punto de clic:
+            </p>
+            <p>
+                \[
+                \vec{d} = (x_{\text{clic}} - x_0, y_{\text{clic}} - y_0)
+                \]
+            </p>
+            <p>
+                \[
+                \hat{d} = \frac{\vec{d}}{\|\vec{d}\|}
+                \]
+            </p>
+            <p>
+                Luego, la velocidad de la bola se obtiene escalando el vector de dirección por una magnitud constante \( v \):
+            </p>
+            <p>
+                \[
+                \vec{v} = \hat{d} \cdot v
+                \]
+            </p>
+
+            <h3>Implementación en Processing</h3>
+            <p>
+                Se ha implementado este modelo en <strong>Processing</strong>, permitiendo que cada bola lanzada siga su trayectoria sin aceleración adicional. Las bolas desaparecen al salir de la pantalla.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/-AkuHNkNXco" 
+                    title="Bubble Shooter con Vectores en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+
+            <p>
+                El video muestra el <strong>lanzador en acción</strong>, permitiendo disparar múltiples bolas en distintas direcciones y observando su movimiento uniforme.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer7">
+            <h2>Ejercicio 7: Dinámica de una Partícula con Fuerzas</h2>
+            <p>
+                En este ejercicio se ha simulado la <strong>dinámica de una partícula</strong>, aplicando la <strong>segunda ley de Newton</strong> para actualizar su movimiento en función de las fuerzas externas que actúan sobre ella.
+            </p>
+
+            <h3>Datos del Problema</h3>
+            <table border="1">
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Masa (\( m \))</td>
+                    <td>2 kg</td>
+                </tr>
+                <tr>
+                    <td>Fuerza aplicada (\( F \))</td>
+                    <td>Variable</td>
+                </tr>
+                <tr>
+                    <td>Aceleración (\( a \))</td>
+                    <td>\( a = \frac{F}{m} \)</td>
+                </tr>
+                <tr>
+                    <td>Ecuaciones de movimiento</td>
+                    <td>\( v = v_0 + a t \), \( x = x_0 + v t \)</td>
+                </tr>
+            </table>
+
+            <h3>Modelo Matemático</h3>
+            <p>
+                La aceleración de la partícula está determinada por la <strong>segunda ley de Newton</strong>:
+            </p>
+            <p>
+                \[
+                F = m a
+                \]
+            </p>
+            <p>
+                Despejando la aceleración:
+            </p>
+            <p>
+                \[
+                a = \frac{F}{m}
+                \]
+            </p>
+            <p>
+                Una vez obtenida la aceleración, se actualiza la velocidad y la posición en cada instante de tiempo utilizando las ecuaciones:
+            </p>
+            <p>
+                \[
+                v = v_0 + a t
+                \]
+            </p>
+            <p>
+                \[
+                x = x_0 + v t
+                \]
+            </p>
+            <p>
+                donde:
+                <ul>
+                    <li>\( v \) es la velocidad de la partícula.</li>
+                    <li>\( x \) es la posición de la partícula en cada instante.</li>
+                    <li>\( a \) es la aceleración determinada por las fuerzas aplicadas.</li>
+                    <li>\( t \) es el tiempo transcurrido.</li>
+                </ul>
+            </p>
+
+            <h3>Implementación en Processing</h3>
+            <p>
+                Se ha implementado este modelo en <strong>Processing</strong>, donde la partícula cae debido a la gravedad y el usuario puede aplicar fuerzas al hacer clic.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/ywaxNrPPD3A" 
+                    title="Simulación de Dinámica en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+
+            <p>
+                El video muestra cómo la partícula se mueve bajo la influencia de la gravedad y cómo el usuario puede aplicarle fuerzas para alterar su trayectoria.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="t1ejer8">
+            <h2>Ejercicio 8: Métodos RK2 y RK4 para la integración numérica</h2>
+            <p>En este ejercicio se ha aplicado el método de <strong>Runge-Kutta de orden 2 (RK2)</strong> y el <strong>Runge-Kutta de orden 4 (RK4)</strong> para resolver la ecuación diferencial:</p>
+            
+            <p>\( \frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5 \)</p>
+            
+            <p>La ecuación ha sido integrada en el intervalo \( x = 0 \) hasta \( x = 2.4 \) con un paso de integración \( dt = 0.15 \). Se compararon los resultados obtenidos con los métodos numéricos RK2 y RK4 frente a la solución real.</p>
+            
+            <h3>Método RK2</h3>
+            <p>El método RK2 (segundo orden) utiliza dos evaluaciones de la función en cada paso de integración:</p>
+            
+            <p>\(
+            k_1 = f(x_n, y_n) \cdot dt
+            \)</p>
+            <p>\(
+            k_2 = f(x_n + dt, y_n + k_1) \cdot dt
+            \)</p>
+            <p>\(
+            y_{n+1} = y_n + \frac{1}{2} (k_1 + k_2)
+            \)</p>
+            
+            <h3>Método RK4</h3>
+            <p>El método RK4 (cuarto orden) mejora la precisión utilizando cuatro evaluaciones por paso:</p>
+            
+            <p>\(
+            k_1 = f(x_n, y_n) \cdot dt
+            \)</p>
+            <p>\(
+            k_2 = f(x_n + dt/2, y_n + k_1/2) \cdot dt
+            \)</p>
+            <p>\(
+            k_3 = f(x_n + dt/2, y_n + k_2/2) \cdot dt
+            \)</p>
+            <p>\(
+            k_4 = f(x_n + dt, y_n + k_3) \cdot dt
+            \)</p>
+            <p>\(
+            y_{n+1} = y_n + \frac{1}{6} (k_1 + 2k_2 + 2k_3 + k_4)
+            \)</p>
+            
+            <h3>Resultados y análisis</h3>
+            <p>Las siguientes gráficas muestran la comparación entre los diferentes métodos y sus errores respectivos.</p>
+            
+            <div class="imagen-container">
+                <img src="images/ejer_pag_29_final.png" alt="Gráfica de métodos numéricos">
+                <p>Comparación de los valores obtenidos con diferentes métodos numéricos.</p>
+            </div>
+            
+            <div class="imagen-container">
+                <img src="images/errores_ejer_pag29_final.png" alt="Gráfica de errores">
+                <p>Errores cometidos por los métodos de integración respecto a la solución exacta.</p>
+            </div>
+            
+            <h3>Análisis de las gráficas</h3>
+            <p>
+                La primera gráfica muestra cómo los métodos RK2 y RK4 se acercan a la solución real de la ecuación diferencial. Se observa que el método RK4 ofrece una mejor aproximación a lo largo de todo el dominio, mientras que RK2 presenta una menor precisión pero sigue siendo superior a los métodos explícitos y semi-implícitos.
+            </p>
+            <p>
+                En la segunda gráfica, donde se representan los errores, se puede notar que el método RK4 tiene los errores más pequeños en comparación con RK2 y los demás métodos. Mientras que Euler explícito y el método semi-implícito presentan errores significativamente mayores, RK2 logra reducirlos en gran medida, aunque sigue siendo superado por RK4, que mantiene un error más bajo y estable en todo el intervalo.
+            </p>
+        </section>
+
+        <section class="ejercicio" id="pr1">
+            <h2>Practica 1: Sistema de 4 muelles</h2>
+            <p>
+                En esta práctica se simula el movimiento de una partícula conectada a cuatro muelles, anclados en los vértices de un cuadrado. Se analizan las fuerzas que actúan sobre la partícula, incluyendo las elásticas de los muelles, el peso por la gravedad y una fuerza de fricción proporcional al cuadrado de la velocidad. La simulación se desarrolla en <strong>Processing</strong> implementando diversos métodos de integración numérica.
+            </p>
+
+            <h3>Fundamentos Físicos</h3>
+            <p>
+                La partícula está sometida a varias fuerzas: la fuerza elástica de cada muelle \( \vec{F}_e = -k (l - l_0) \hat{l} \), donde \( l \) es la elongación actual y \( l_0 \) la de reposo; la fuerza gravitatoria \( \vec{F}_g = m \cdot \vec{g} \); y la fuerza de fricción \( \vec{F}_d = -k_d \cdot \vec{v}^2 \cdot \hat{v} \).
+            </p>
+            <p>
+                La dinámica del sistema se resuelve mediante integración numérica con los métodos: <em>Euler explícito</em>, <em>Euler semi-implícito</em>, <em>Heun</em>, <em>RK2</em> y <em>RK4</em>. Se compara su estabilidad y convergencia.
+            </p>
+
+            <h3>Análisis de Estabilidad y Convergencia</h3>
+            <ul>
+                <li>Se estudia la conservación de la energía sin fricción (\( k_d = 0 \)) para comprobar qué integradores son más estables.</li>
+                <li>Con \( k_d > 0 \), se analiza la convergencia hacia un estado de reposo y cómo diferentes valores de \( k_d \) influyen en los resultados.</li>
+                <li>Finalmente, se prueba cómo afecta el paso de integración a la estabilidad de cada método, graficando el máximo valor de energía en los primeros 5 segundos.</li>
+            </ul>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Jq1ND5EccOk"
+                title="Simulación del sistema de 4 muelles" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+                </iframe>
+            </div>
+
+        </section>
+    </section>
+
+    <section id="tema2">
+        <section class="ejercicio" id="t2ejer1">
+            <h2>Ejercicio 1: Emisor de Cohetes Pirotécnicos</h2>
+            <p>
+                En este ejercicio se ha desarrollado una simulación en <strong>Processing</strong> de un sistema de partículas
+                que representa el lanzamiento de cohetes pirotécnicos. Cada cohete asciende verticalmente con una velocidad inicial aleatoria, y al finalizar su vida útil (lifespan), genera una explosión con múltiples partículas que se dispersan radialmente.
+            </p>
+
+            <h3>Fundamentos del Sistema</h3>
+
+            <p><strong>1. Generación de Cohetes</strong></p>
+            <p>
+                En cada frame, se genera un nuevo cohete con posición aleatoria en la base y velocidad vertical hacia arriba. 
+                Esta partícula se almacena como un objeto con atributos de posición, velocidad y vida útil.
+            </p>
+            <p>
+                La velocidad inicial se define como:
+            </p>
+            <p>
+                \[
+                v = (0, -\text{random}(5, 8))
+                \]
+            </p>
+
+            <p><strong>2. Condición de Explosión</strong></p>
+            <p>
+                Cuando el parámetro <code>lifespan</code> del cohete llega a 0, se genera una explosión en su posición.
+                Esta consiste en crear múltiples partículas nuevas (fragmentos de explosión) con direcciones aleatorias y velocidades variables.
+            </p>
+
+            <p><strong>3. Partículas de Explosión</strong></p>
+            <p>
+                Las partículas generadas por la explosión se dispersan en 360º usando direcciones aleatorias. Su velocidad
+                se genera usando componentes cartesianos:
+            </p>
+            <p>
+                \[
+                v_x = \text{random}(-1, 1) \cdot v_{\text{max}}, \quad
+                v_y = \text{random}(-1, 1) \cdot v_{\text{max}}
+                \]
+            </p>
+            <p>
+                Además, cada partícula tiene un <code>lifespan</code> que se va reduciendo con el tiempo, y su opacidad disminuye en consecuencia.
+            </p>
+
+            <p><strong>4. Visualización</strong></p>
+            <p>
+                Las partículas de explosión se representan como puntos o trazos radiales desde el centro de la explosión.
+                Cuando el <code>lifespan</code> llega a 0, se eliminan de la simulación.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer2">
+            <h2>Ejercicio 2: Simulación de Cohetes con Explosión Elíptica</h2>
+            <p>
+                En este ejercicio se ha implementado una simulación en <strong>Processing</strong> donde los cohetes, al explotar, generan 
+                partículas que se distribuyen siguiendo una forma elíptica. Cada explosión es distinta, ya que los ejes mayor y menor de la elipse 
+                se determinan de forma aleatoria en cada evento.
+            </p>
+
+            <h3>Fundamentos del Sistema</h3>
+
+            <p><strong>1. Emisión del Cohete</strong></p>
+            <p>
+                Se lanza un cohete desde la parte inferior de la pantalla con velocidad vertical ascendente aleatoria. 
+                Cuando su <code>lifespan</code> se agota, se produce la explosión.
+            </p>
+
+            <p><strong>2. Explosión Elíptica</strong></p>
+            <p>
+                Al explotar, se generan \( N \) partículas que siguen una distribución elíptica. Los ejes de la elipse 
+                son generados aleatoriamente:
+            </p>
+            <p>
+                \[
+                a = \text{random}(30, 80), \quad b = \text{random}(10, 40)
+                \]
+            </p>
+            <p>
+                Para cada partícula se calcula un ángulo \( \theta \in [0, 2\pi] \), y las componentes de la velocidad inicial se asignan según la parametrización de la elipse:
+            </p>
+            <p>
+                \[
+                v_x = a \cdot \cos(\theta), \quad v_y = b \cdot \sin(\theta)
+                \]
+            </p>
+            <p>
+                Así, la explosión toma una forma elíptica con una orientación circular variable.
+            </p>
+
+            <p><strong>3. Movimiento y Desaparición</strong></p>
+            <p>
+                Las partículas se mueven con sus velocidades iniciales y se desvanecen conforme disminuye su parámetro <code>lifespan</code>, hasta desaparecer completamente.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer3">
+            <h2>Ejercicio 3: Simulación de Explosión de Partículas</h2>
+            <p>
+                Este ejercicio consiste en una simulación básica en <strong>Processing</strong> que representa una explosión visual de partículas. 
+                El objetivo es emular el efecto de una detonación en la que múltiples partículas se propagan radialmente desde un punto central, 
+                creando un efecto visual similar al de fuegos artificiales.
+            </p>
+
+            <h3>Funcionamiento del Sistema</h3>
+
+            <p><strong>1. Generación de Partículas</strong></p>
+            <p>
+                En un instante determinado, se generan \( N \) partículas en el mismo punto central. A cada partícula se le asigna un ángulo 
+                aleatorio \( \theta \in [0, 2\pi] \) para simular una propagación radial uniforme.
+            </p>
+
+            <p><strong>2. Velocidad Inicial</strong></p>
+            <p>
+                La dirección de cada partícula se calcula con funciones trigonométricas y se escala con una velocidad aleatoria:
+            </p>
+            <p>
+                \[
+                v_x = \cos(\theta) \cdot r, \quad v_y = \sin(\theta) \cdot r
+                \]
+            </p>
+            <p>
+                donde \( r \) es una magnitud aleatoria para simular explosiones más realistas, con velocidades variables.
+            </p>
+
+            <p><strong>3. Movimiento y Lifespan</strong></p>
+            <p>
+                Las partículas se mueven siguiendo sus vectores de velocidad. Además, cada una tiene un parámetro <code>lifespan</code> que 
+                disminuye con el tiempo, haciendo que las partículas se desvanezcan progresivamente hasta desaparecer.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer4">
+            <h2>Ejercicio 4: Simulación de Fuente de Agua</h2>
+            <p>
+                En este ejercicio se ha implementado una fuente de partículas que simula una <strong>fuente de agua</strong>. 
+                El sistema genera de manera continua partículas desde un origen fijo, que ascienden con una trayectoria vertical 
+                ligeramente dispersa para emular el efecto de gotas expulsadas por una fuente real.
+            </p>
+
+            <h3>Funcionamiento del Sistema</h3>
+
+            <p><strong>1. Emisión Continua</strong></p>
+            <p>
+                En cada iteración del bucle de dibujo de Processing se genera una nueva partícula. 
+                La posición de origen se mantiene fija (por ejemplo, la parte inferior central de la pantalla).
+            </p>
+
+            <p><strong>2. Velocidad Aleatoria</strong></p>
+            <p>
+                Cada partícula es creada con una velocidad inicial hacia arriba (componente vertical negativa), 
+                y una ligera desviación horizontal aleatoria. La velocidad se define como:
+            </p>
+            <p>
+                \[
+                v_x = \text{random}(-a, a), \quad v_y = \text{random}(-v_{\text{min}}, -v_{\text{max}})
+                \]
+            </p>
+            <p>
+                Esto permite que las trayectorias sean similares pero no idénticas, dando naturalidad a la animación.
+            </p>
+
+            <p><strong>3. Movimiento y Lifespan</strong></p>
+            <p>
+                Cada partícula asciende y al mismo tiempo va perdiendo opacidad (lifespan), simulando el efecto de evaporación o pérdida de energía. 
+                Se elimina una partícula una vez que su lifespan llega a 0.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer5">
+            <h2>Ejercicio 5: Emisor de Humo</h2>
+            <p>
+                En este ejercicio se ha desarrollado un sistema de partículas para simular un <strong>emisor de humo</strong>. 
+                El humo se genera continuamente desde una posición fija y se eleva lentamente mientras se difumina, simulando 
+                el comportamiento natural de una columna de humo.
+            </p>
+
+            <h3>Características del Sistema</h3>
+
+            <p><strong>1. Emisión Constante</strong></p>
+            <p>
+                En cada fotograma se crea una nueva partícula en la posición del emisor (por ejemplo, una chimenea). 
+                La frecuencia puede ajustarse para variar la densidad del humo.
+            </p>
+
+            <p><strong>2. Movimiento y Desplazamiento</strong></p>
+            <p>
+                Las partículas tienen una velocidad vertical leve y una ligera variación horizontal para crear una apariencia dispersa:
+            </p>
+            <p>
+                \[
+                v_x = \text{random}(-a, a), \quad v_y = \text{random}(-b, -c)
+                \]
+            </p>
+            <p>
+                Donde \( a \) representa la amplitud de la dispersión horizontal y \( b, c \) los límites de la velocidad de ascenso.
+            </p>
+
+            <p><strong>3. Difuminado con el Tiempo</strong></p>
+            <p>
+                Cada partícula reduce su opacidad gradualmente (lifespan decreciente), dando la impresión de que el humo se disipa en el aire.
+                Cuando el lifespan llega a cero, la partícula se elimina.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer6">
+            <h2>Ejercicio 6: Partícula Flotante</h2>
+            <p>
+                En este ejercicio se ha implementado una simulación física en <strong>Processing</strong> donde una partícula es 
+                liberada desde una posición superior y cae bajo la acción de la gravedad hasta entrar en contacto con un fluido. 
+                Una vez alcanza la superficie del agua, comienza a experimentar la fuerza de flotación, lo que provoca que parte de ella 
+                quede sumergida y se estabilice en equilibrio.
+            </p>
+
+            <h3>Fundamentos Físicos</h3>
+
+            <p><strong>1. Fuerza Gravitatoria</strong></p>
+            <p>
+                Se aplica una aceleración constante hacia abajo a la partícula:
+            </p>
+            <p>
+                \[
+                \vec{F}_g = m \cdot \vec{g}
+                \]
+            </p>
+
+            <p><strong>2. Detección de Inmersión</strong></p>
+            <p>
+                Se calcula cuánto de la partícula está sumergido en el agua evaluando la diferencia entre su posición y el nivel del agua.
+                A partir de esa profundidad \( h \), se estima el volumen sumergido \( V_s \) de una esfera parcialmente sumergida:
+            </p>
+            <p>
+                \[
+                V_s = \frac{\pi h^2 (3r - h)}{3}
+                \]
+
+                (O una forma equivalente derivada de la fórmula del casquete esférico).
+            </p>
+
+            <p><strong>3. Fuerza de Flotación</strong></p>
+            <p>
+                La fuerza de flotación se calcula como:
+            </p>
+            <p>
+                \[
+                \vec{F}_b = - \rho \cdot V_s \cdot g
+                \]
+            </p>
+            <p>
+                Donde \( \rho \) es la densidad del fluido y \( V_s \) el volumen sumergido.
+            </p>
+
+            <p><strong>4. Amortiguación</strong></p>
+            <p>
+                Para evitar oscilaciones exageradas, se aplica una ligera amortiguación a la velocidad:
+            </p>
+            <p>
+                \[
+                \vec{v} \leftarrow \vec{v} \cdot (1 - k)
+                \]
+            </p>
+
+            <p><strong>5. Movimiento</strong></p>
+            <p>
+                La posición se actualiza sumando la velocidad a cada paso:
+            </p>
+            <p>
+                \[
+                \vec{p} \leftarrow \vec{p} + \vec{v}
+                \]
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t2ejer7">
+            <h2>Ejercicio 7: Emisor de Spray Horizontal</h2>
+            <p>
+                En este ejercicio se ha diseñado un sistema de partículas en <strong>Processing</strong> que simula un spray 
+                o pulverizador horizontal. Las partículas son generadas continuamente desde un emisor y se propagan 
+                con direcciones aleatorias dentro de un rango angular determinado, simulando una dispersión horizontal controlada.
+            </p>
+
+            <h3>Fundamentos de Simulación</h3>
+
+            <p><strong>1. Generación Continua de Partículas</strong></p>
+            <p>
+                En cada iteración del bucle principal (<code>draw()</code>), se genera una nueva partícula en la posición del emisor.
+                Esta partícula es inicializada con una velocidad aleatoria dentro de un abanico angular centrado en la horizontal:
+            </p>
+            <p>
+                \[
+                \theta \in \left[ -\alpha, \alpha \right], \quad \vec{v} = v_0 \cdot \left( \cos(\theta), \sin(\theta) \right)
+                \]
+            </p>
+            <p>
+                Donde \( \alpha \) es la mitad del ángulo total de dispersión (por ejemplo, 20°) y \( v_0 \) es la magnitud de la velocidad.
+            </p>
+
+            <p><strong>2. Movimiento y Desvanecimiento</strong></p>
+            <p>
+                Las partículas se desplazan según su velocidad y disminuyen su opacidad gradualmente mediante una propiedad 
+                <code>lifespan</code>, lo que genera un efecto de disipación:
+            </p>
+            <p>
+                \[
+                \vec{p} \leftarrow \vec{p} + \vec{v}, \quad \text{lifespan} \leftarrow \text{lifespan} - \delta
+                \]
+            </p>
+
+            <p><strong>3. Eliminación de Partículas</strong></p>
+            <p>
+                Cuando la vida útil de una partícula llega a 0, se elimina del sistema para optimizar el rendimiento:
+            </p>
+            <p>
+                \[
+                \text{if } \text{lifespan} \leq 0 \Rightarrow \text{eliminar}
+                \]
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="pr2">
+            <h2>Practica 2: Fuente de Agua 2D con Sistema de Partículas</h2>
+            <p>
+                En esta práctica se simula una fuente de agua bidimensional mediante un sistema de partículas. El objetivo principal es representar el comportamiento del agua al salir a presión desde un emisor, teniendo en cuenta la gravedad y el rozamiento con el aire.
+            </p>
+
+            <h3>Descripción del Sistema</h3>
+            <p>
+                El sistema emite partículas que simulan gotas de agua. Cada partícula tiene una vida útil limitada y está sujeta a las fuerzas de gravedad y fricción. La gravedad hace que las partículas caigan, mientras que la fricción con el aire reduce progresivamente su velocidad. Se puede modificar la frecuencia de emisión y el tiempo de vida de las partículas para observar diferentes dinámicas del sistema.
+            </p>
+
+            <h3>Modelado Físico</h3>
+            <ul>
+                <li><strong>Gravedad:</strong> \( \vec{g} = (0, 9.8) \, \text{m/s}^2 \)</li>
+                <li><strong>Rozamiento:</strong> proporcional a la velocidad de la partícula</li>
+                <li><strong>Vida útil:</strong> cada partícula se elimina tras un tiempo predefinido</li>
+                <li><strong>Integración:</strong> se implementan métodos de Euler explícito e implícito</li>
+            </ul>
+
+            <h3>Exploración de Parámetros</h3>
+            <p>
+                Se estudia cómo afecta la frecuencia de emisión y el tiempo de vida al número total de partículas y la carga computacional. Se observa que valores altos en ambos parámetros generan acumulación excesiva de partículas y sobrecarga del sistema, mientras que valores bajos pueden hacer que la fuente parezca intermitente o irreal.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tl21j7EpMxs"
+                title="Simulación Fuente de Agua en Processing" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+
+        </section>
+
+        <section class="ejercicio" id="pr3ejer1">
+            <h2> Practica 3 Ejercicio 1: Simulación de Billar Francés</h2>
+
+            <p>En esta práctica se han abordado dos simulaciones físicas diferentes: una simulación de un <strong>billar francés</strong> sin troneras, y una simulación de <strong>fluido en un recipiente</strong> mediante partículas interactivas que colisionan entre sí y con las paredes.</p>
+
+            <h3>Simulación de Billar Francés</h3>
+            <p>
+                Esta simulación implementa un modelo de colisiones basado en velocidades. En ella, un conjunto de bolas de billar interactúan entre sí y con las bandas de la mesa, modelando las colisiones mediante:
+            </p>
+            <ul>
+                <li>Detección de colisiones entre pares de bolas.</li>
+                <li>Restitución de la posición en caso de colisión.</li>
+                <li>Cálculo de velocidades post-colisión teniendo en cuenta pérdidas energéticas.</li>
+            </ul>
+            <p>
+                Las colisiones con las bandas también se simulan con una pérdida de energía controlada mediante un coeficiente \( C_{\text{pared}} \), mientras que la fricción con la mesa es proporcional al cuadrado de la velocidad.
+            </p>
+            <p>
+                Además, se realizaron pruebas aumentando el número de bolas hasta \( n = 100 \), observando que la estabilidad del sistema se ve comprometida con valores altos. A medida que aumenta \( n \), las colisiones son más frecuentes, generando acumulación de errores numéricos y solapamientos entre partículas. Aunque estas situaciones tienden a corregirse con el tiempo, se identificó que incrementar el coeficiente de fricción \( K_d \) ayuda parcialmente a estabilizar la simulación al disminuir la energía cinética.
+            </p>
+            <p>
+                Se experimentó también con una fuerza constante que empuja todas las bolas hacia una esquina de la mesa, simulando una zona de atracción. En este caso, el sistema pierde estabilidad mucho más rápido, con errores evidentes como solapamientos y bolas saliendo fuera de la mesa. El ajuste de \( K_d \) no resuelve el problema, ya que solo ralentiza el movimiento sin evitar la desestabilización debida a múltiples colisiones simultáneas.
+            </p>
+            <p>
+                El usuario puede:
+                <ul>
+                <li>Seleccionar una bola y aplicarle impulso usando el ratón.</li>
+                <li>Hacer que todas las bolas se muevan aleatoriamente.</li>
+                <li>Activar o desactivar las colisiones entre bolas mediante una tecla.</li>
+                </ul>
+            </p>
+            <div class="video-container">
+                <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/SfDC-OPHDDA" 
+                title="Simulación de Billar Francés"
+                frameborder="0"
+                allowfullscreen>
+                </iframe>
+            </div>
+
+        </section>
+
+        <section class="ejercicio" id="pr3ejer2">
+            <h2> Practica 3 Ejercicio 2: Simulación de Fluido con Colisiones Optimizada (Grid y Hash)</h2>
+            <p>
+                En este segundo ejercicio se simula el movimiento de una gran cantidad de partículas (representando un fluido) dentro de un recipiente rectangular. El objetivo es optimizar las colisiones entre partículas utilizando dos métodos: una rejilla espacial (grid) y una función hash. Estas técnicas permiten evitar comparaciones innecesarias entre todas las partículas, mejorando la eficiencia computacional.
+            </p>
+
+            <h3>Aspectos Técnicos</h3>
+            <ul>
+                <li>Implementación de dos estructuras: malla uniforme (grid) y tabla hash para detectar posibles colisiones.</li>
+                <li>Colisiones elásticas tratadas de manera local en celdas vecinas.</li>
+                <li>Distribución aleatoria inicial de partículas dentro del recipiente.</li>
+                <li>Representación gráfica eficiente que permite visualizar el comportamiento colectivo del sistema.</li>
+            </ul>
+
+            <h3>Comparativa de Estructuras</h3>
+            <p>
+                Ambas técnicas mejoran el rendimiento respecto al método clásico "todas contra todas", especialmente al aumentar el número de partículas. El comportamiento del sistema simula un líquido viscoso al caer y dispersarse dentro del recipiente.
+            </p>
+
+            <p>
+                Se analizó el rendimiento comparando los tres modos de colisiones: NONE, GRID y HASH. Se concluyó que:
+                <ul>
+                <li>El modo GRID ofreció los mejores tiempos de ejecución en configuraciones medias.</li>
+                <li>El modo HASH presentó más flexibilidad, pero también una mayor sobrecarga cuando las celdas eran muy pequeñas.</li>
+                </ul>
+            </p>
+
+            <p>
+                Se realizaron tests variando el número de partículas y el tamaño de celda \( S_c \) y \( N_c \), concluyendo que GRID es más eficiente para este tipo de simulación en Processing.
+            </p>
+
+            <h3>Visualización</h3>
+        
+            <div class="video-container">
+                <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/ZZYOufoZlJY" 
+                        title="Simulación de Fluido con Colisiones"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </section>
+
+    <section id="tema3">
+         <section class="ejercicio" id="t3ejer1">
+            <h2>Ejercicio 1: Simulación de Cuerda con Sistema Masa-Muelle</h2>
+            <p>
+                En este proyecto se ha simulado el comportamiento dinámico de una cuerda elástica suspendida en el aire.
+                La cuerda está formada por múltiples partículas unidas entre sí mediante muelles, lo que permite
+                representar de forma realista oscilaciones y deformaciones ante la acción de la gravedad y el arrastre del usuario.
+            </p>
+
+            <h3>Modelo Físico</h3>
+            <p>
+                Cada punto de la cuerda se modela como una partícula con masa, afectada por la gravedad. Estas partículas están
+                conectadas mediante muelles que ejercen una fuerza proporcional a su elongación (Ley de Hooke):
+            </p>
+            <p>
+                \[
+                \vec{F}_e = -k \cdot (l - l_0) \cdot \hat{u}
+                \]
+            </p>
+            <p>
+                Además, se añade un término de amortiguamiento proporcional a la diferencia de velocidad entre los extremos:
+            </p>
+            <p>
+                \[
+                \vec{F}_d = -c \cdot (\vec{v}_a - \vec{v}_b)
+                \]
+            </p>
+            <p>
+                donde \( k \) es la constante elástica del muelle, \( c \) el coeficiente de amortiguamiento,
+                \( l \) la longitud actual, \( l_0 \) la longitud de reposo, y \( \hat{u} \) el vector unitario entre partículas.
+            </p>
+
+            <h3>Interacción</h3>
+            <p>
+                El usuario puede interactuar con la cuerda pulsando y arrastrando sus extremos con el ratón. La simulación
+                responde en tiempo real a estas acciones, mostrando cómo se propaga el movimiento a lo largo de la cuerda.
+            </p>
+
+            <h3>Visualización</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/CjZ5bKdHGmg" 
+                    title="Simulación de Cuerda Elástica en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t3ejer2">
+            <h2>Ejercicio 2: Simulación de Pelo con Sistema Masa-Muelle</h2>
+            <p>
+                Este ejercicio representa una simulación realista del comportamiento de múltiples pelos o fibras delgadas,
+                modeladas como cadenas de partículas conectadas por muelles. Cada pelo responde a la gravedad y puede ser 
+                manipulado por el usuario mediante el ratón, generando interacciones suaves y naturales.
+            </p>
+
+            <h3>Modelo de Simulación</h3>
+            <p>
+                Cada pelo se construye como una sucesión de masas conectadas mediante muelles elásticos amortiguados.
+                La física está basada en:
+            </p>
+            <p>
+                <strong>1. Fuerza Elástica (Hooke):</strong>
+                \[
+                \vec{F}_e = -k \cdot (l - l_0) \cdot \hat{u}
+                \]
+            </p>
+            <p>
+                <strong>2. Fuerza de Amortiguamiento:</strong>
+                \[
+                \vec{F}_d = -c \cdot (\vec{v}_a - \vec{v}_b)
+                \]
+            </p>
+            <p>
+                Estas fuerzas se suman a la gravedad y se aplican a cada nodo (partícula) para determinar su movimiento
+                usando integración de Euler semi-implícito.
+            </p>
+
+            <h3>Interacción y Visualización</h3>
+            <p>
+                El usuario puede seleccionar y arrastrar cualquier nodo de los pelos con el ratón, generando deformaciones 
+                dinámicas que se propagan por toda la estructura. Esta interacción simula el movimiento natural de cabellos o fibras textiles.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/_xZeQ86BfPM" 
+                    title="Simulación de Pelo en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t3ejer3">
+            <h2>Ejercicio 3: Simulación de Banderas con Fuerzas Externas</h2>
+            <p>
+                En este proyecto se ha desarrollado una simulación de varias banderas que ondean en el aire bajo la influencia de fuerzas físicas 
+                como el viento, la gravedad y el amortiguamiento. Las banderas están construidas como mallas de partículas conectadas por muelles,
+                siguiendo diferentes configuraciones estructurales.
+            </p>
+
+            <h3>Tipos de Estructura</h3>
+            <ul>
+                <li><strong>Red estructural:</strong> conecta nodos horizontal y verticalmente.</li>
+                <li><strong>Flexión:</strong> añade conexiones a nodos a dos pasos de distancia, simulando rigidez.</li>
+                <li><strong>Cizalla:</strong> incluye conexiones diagonales, ofreciendo resistencia a deformaciones inclinadas.</li>
+            </ul>
+
+            <h3>Modelo Físico</h3>
+            <p>
+                Cada vértice de la malla está sometido a:
+            </p>
+            <ul>
+                <li>Fuerza elástica (Hooke) por los muelles que lo conectan con los vecinos.</li>
+                <li>Fuerza de amortiguamiento proporcional a la velocidad.</li>
+                <li>Gravedad, si está activada.</li>
+                <li>Fuerza de viento proyectada sobre las normales de los polígonos.</li>
+            </ul>
+
+            <h3>Interacción</h3>
+            <p>
+                El usuario puede alternar el viento y la gravedad pulsando las teclas <strong>v</strong> y <strong>g</strong>, respectivamente.
+                El efecto visual muestra cómo las distintas estructuras de malla afectan el comportamiento de las banderas.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/1y6aiP5qcp8" 
+                    title="Simulación de Banderas en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="t3ejer4">
+            <h2>Ejercicio 4: Colisión entre una Esfera y una Malla Deformable</h2>
+            <p>
+                En este proyecto se ha simulado una esfera que colisiona con una malla suspendida en el aire. La malla está formada por 
+                partículas conectadas por muelles y puede romperse si la tensión supera ciertos límites, simulando un tejido elástico.
+            </p>
+
+            <h3>Componentes del Modelo</h3>
+            <ul>
+                <li><strong>Malla:</strong> estructura cuadriculada de partículas unidas por muelles con diferentes configuraciones.</li>
+                <li><strong>Esfera:</strong> objeto dinámico que cae bajo la gravedad y puede interactuar con la malla mediante colisión.</li>
+                <li><strong>Muelles de colisión:</strong> se generan dinámicamente entre los nodos de la malla y la esfera cuando hay contacto.</li>
+            </ul>
+
+            <h3>Tipos de Configuración de Malla</h3>
+            <p>El usuario puede cambiar la disposición de los muelles pulsando las teclas del 1 al 5:</p>
+            <ol>
+                <li>Solo estructural</li>
+                <li>Solo cizalla</li>
+                <li>Estructural + cizalla</li>
+                <li>Estructural + flexión</li>
+                <li>Combinación de las tres</li>
+            </ol>
+
+            <h3>Parámetros Dinámicos</h3>
+            <ul>
+                <li>Velocidad de la esfera ajustable con las teclas de flecha ↑ y ↓</li>
+                <li>La malla puede configurarse como <strong>rompible</strong> o <strong>irrompible</strong> pulsando la tecla <strong>b</strong></li>
+            </ul>
+
+            <h3>Visualización</h3>
+            <p>
+                La simulación muestra cómo diferentes configuraciones y materiales responden al impacto, con posibilidad de deformación permanente 
+                o rebote elástico.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/Fu4W2V_moE8" 
+                    title="Simulación de Colisión Malla y Esfera en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="pr4ejer1">
+            <h2>Practica 4 Ejercicio 1: Simulación de un Cubo Deformable con Colisiones</h2>
+            <p>
+                Esta simulación representa un cubo formado por partículas conectadas por muelles elásticos y amortiguados.
+                El objetivo es simular su caída bajo la gravedad y su interacción con el suelo mediante una colisión elástica con amortiguamiento.
+                El sistema responde dinámicamente a las fuerzas internas y externas, permitiendo observar cómo el cubo se deforma, rebota y amortigua con el tiempo.
+            </p>
+
+            <h3>Estructura del Cubo</h3>
+            <p>
+                El cubo se modela como una red tridimensional de <strong>nodos de masa</strong> conectados por <strong>muelles elásticos</strong>:
+            </p>
+            <ul>
+                <li>Configuración típica: 4x4x4 (64 partículas).</li>
+                <li>Los muelles se crean entre nodos separados una distancia inferior a un umbral, generando una red tridimensional compacta.</li>
+                <li>Las fuerzas entre partículas incluyen:
+                    <ul>
+                        <li><strong>Fuerza elástica de Hooke:</strong> proporcional a la elongación del muelle respecto a su longitud de reposo.</li>
+                        <li><strong>Fuerza de amortiguamiento:</strong> proporcional a la velocidad relativa proyectada en la dirección del muelle.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Interacción con el Suelo</h3>
+            <p>
+                Cuando una partícula cruza el plano del suelo, se le aplica una fuerza de colisión basada en:
+            </p>
+            <ul>
+                <li><strong>Compresión vertical:</strong> proporcional a la distancia que penetra bajo el suelo.</li>
+                <li><strong>Amortiguamiento:</strong> proporcional a la componente vertical de la velocidad de la partícula.</li>
+            </ul>
+            <p>
+                El objetivo es evitar que el cubo atraviese el suelo o se comporte de forma no realista al impactar.
+            </p>
+
+            <h3>Modelo Físico y Simulación</h3>
+            <p>
+                Cada frame, la simulación:
+            </p>
+            <ol>
+                <li>Aplica gravedad a cada nodo.</li>
+                <li>Aplica las fuerzas de los muelles entre nodos.</li>
+                <li>Aplica fuerzas de colisión si alguna partícula toca el suelo.</li>
+                <li>Actualiza la posición y velocidad mediante integración de Euler semi-implícito.</li>
+            </ol>
+
+            <h3>Visualización</h3>
+            <p>
+                La escena incluye un plano horizontal que representa el suelo, y se utilizan colores para representar el estado de los muelles:
+            </p>
+            <ul>
+                <li><span style="color:red;"><strong>Rojo:</strong></span> muelle comprimido.</li>
+                <li><span style="color:green;"><strong>Verde:</strong></span> muelle estirado.</li>
+            </ul>
+            <p>
+                Además, la cámara 3D se puede rotar libremente usando <strong>PeasyCam</strong>, y el cubo se reinicia con la tecla <strong>I</strong>.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/glKSWx2gVd8" 
+                    title="Simulación Cubo Deformable en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/1aATAJSdGxw" 
+                    title="Simulación Cubo Deformable en Processing" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="ejercicio" id="pr4ejer2">
+            <h2>Practica 4 Ejercicio 2: Simulación de Ondas Oceánicas</h2>
+            <p>
+                En esta simulación se representa el comportamiento del mar mediante una malla de vértices <strong>(mapa de alturas)</strong> que oscilan bajo distintos tipos de onda.
+                Se han implementado tres modelos: <strong>Gerstner</strong>, <strong>direccional</strong> y <strong>radial</strong>, los cuales permiten una representación visual más o menos realista del movimiento del océano.
+                La simulación es completamente cinemática y no utiliza integración de fuerzas.
+            </p>
+
+            <h3>Modelos de Onda Implementados</h3>
+            <ul>
+                <li><strong>Onda Gerstner:</strong> genera desplazamientos circulares en X, Y y Z, simulando el patrón realista de olas profundas.</li>
+                <li><strong>Onda Direccional:</strong> propaga el movimiento de forma uniforme en una sola dirección, con variaciones principalmente en el eje Y.</li>
+                <li><strong>Onda Radial:</strong> produce ondas que se expanden desde un punto central, imitando el efecto de una perturbación como una gota en el agua.</li>
+            </ul>
+
+            <h3>Parámetros Configurables</h3>
+            <ul>
+                <li><strong>Amplitud (m):</strong> altura de la ola desde el eje central.</li>
+                <li><strong>Longitud de onda (m):</strong> distancia entre dos crestas.</li>
+                <li><strong>Velocidad (m/s):</strong> define la rapidez de propagación de la onda.</li>
+                <li><strong>Afinamiento (solo Gerstner):</strong> controla la forma de la onda, haciéndola más puntiaguda o suave.</li>
+            </ul>
+            <p>
+                Estos valores se pueden modificar manualmente o programáticamente para observar su impacto visual. Se ha comprobado que amplitudes demasiado grandes o longitudes de onda muy cortas provocan artefactos poco realistas.
+            </p>
+
+            <h3>Interacción del Usuario</h3>
+            <ul>
+                <li>Tecla <strong>1</strong>: sin ondas.</li>
+                <li>Tecla <strong>2</strong>: onda Gerstner.</li>
+                <li>Tecla <strong>3</strong>: onda direccional.</li>
+                <li>Tecla <strong>4</strong>: onda radial.</li>
+                <li>Tecla <strong>T</strong>: alternar entre modo malla (wireframe) y superficie texturizada.</li>
+                <li>Teclas <strong>W, A, S, D</strong>: mover la boya por la superficie del mar para comprobar su desplazamiento.</li>
+            </ul>
+
+            <h3>Visualización y Escena</h3>
+            <p>
+                La escena se representa en 3D con <strong>PeasyCam</strong>, permitiendo la navegación libre por la simulación. La malla de agua utiliza una textura
+                de mar, mientras que el cielo se representa mediante una caja envolvente texturizada (skybox). La boya, una esfera con textura propia,
+                permite comprobar el efecto de las ondas sobre un objeto flotante.
+            </p>
+
+            <h3>Demostración en Vídeo</h3>
+            <p>
+                En los siguientes vídeos se muestra la simulación en funcionamiento, incluyendo una explicación de los tipos de onda, los parámetros utilizados y los efectos de su modificación.
+            </p>
+
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/R-9tfAFIoOQ" 
+                    title="Simulación de Ondas Oceánicas" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+    </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 - Portafolio de Ejercicios | Desarrollado por Luis Planella Hernandez</p>
+    </footer>
+
+</body>
+</html>
