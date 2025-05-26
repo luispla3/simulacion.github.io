@@ -57,6 +57,7 @@
                 <li><a href="#t3ejer4">Ejercicio 4: Colisión entre una Esfera y una Malla Deformable</a></li>
                 <li><a href="#pr4ejer1">Practica 4 Ejercicio 1: Cubo Deformable con Colisiones</a></li>
                 <li><a href="#pr4ejer2">Practica 4 Ejercicio 2: Ondas Oceánicas</a></li>
+                <li><a href="#pr5ejer4">Practica 5: Simulación de Carrera de Canicas (Marble Race 2D)</a></li>
             </ul>
             </li>
         </ul>
@@ -874,7 +875,7 @@
 
             <h3>Visualización</h3>
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/DSx7Z-wxvVA"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -926,7 +927,7 @@
             </p>
 
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5nocOBqBCQU"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -970,7 +971,7 @@
             </p>
 
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VE9spay88pU"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -1015,7 +1016,7 @@
             </p>
 
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/U8PmUmA7Pcw"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -1059,7 +1060,7 @@
             </p>
 
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/pLvnBDaNBYE"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -1135,7 +1136,7 @@
             </p>
 
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/qk7ZhxeeI8Y"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -1190,7 +1191,7 @@
 
             <h3>Visualización</h3>
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/eN3q6nJ1V00"
                 title="Simulación Fuente de Agua en Processing" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -1644,6 +1645,44 @@
                 </iframe>
             </div>
         </section>
+
+        <section class="ejercicio" id="pr5ejer4">
+        <h2>Práctica 5: Simulación de Carrera de Canicas (Marble Race 2D)</h2>
+
+        <p>
+            En esta práctica se ha desarrollado una <strong>simulación física interactiva</strong> de tipo carrera de canicas en 2D, haciendo uso del motor <strong>Fisica</strong> en el entorno <strong>Processing</strong>. 
+            El objetivo ha sido aplicar el modelo de sólidos rígidos, colisiones y uniones físicas para crear un entorno dinámico, impredecible y jugable.
+        </p>
+
+        <h3>Descripción de la simulación</h3>
+        <p>
+            El proyecto consiste en una pista vertical en la que varias canicas descienden influenciadas por la gravedad y se enfrentan a distintos tipos de obstáculos. 
+            Antes de comenzar la carrera, el jugador debe seleccionar una canica haciendo clic en su número. Durante la carrera, su canica queda marcada visualmente.
+        </p>
+
+        <ul>
+            <li>Las canicas están identificadas por un número único visible en pantalla y por diferentes colores.</li>
+            <li>El recorrido se divide en cuadrantes con obstáculos aleatorios distribuidos por zonas.</li>
+            <li>Se implementan tanto obstáculos rotatorios como obstáculos dinámicos con uniones físicas <code>FRevoluteJoint</code>.</li>
+            <li>El jugador puede seguir visualmente su canica durante toda la carrera.</li>
+            <li>Cuando tres canicas llegan al final del recorrido, se muestra un pódium visual con colores (oro, plata y bronce).</li>
+            <li>Si la canica del jugador entra en el pódium, se muestra el mensaje "¡TU CANICA!" en rojo.</li>
+        </ul>
+
+        <p>
+            Para garantizar la aleatoriedad y la variabilidad en los resultados, cada carrera genera una nueva distribución de obstáculos con diferentes velocidades y tamaños. Esto hace que el resultado no sea predecible y que la interacción física tenga un papel clave.
+        </p>
+
+        <div class="video-container">
+            <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/N1iEfhhlrZg"
+            title="Ejemplo de dinámica Marble Race"
+            frameborder="0"
+            allowfullscreen>
+            </iframe>
+        </div>
+        </section>
+
 
     </section>
 
