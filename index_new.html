@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Académico | Luis Planella Hernandez</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="main-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Portfolio Académico</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#about">Acerca de</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Portfolio de Proyectos Académicos</h1>
+            <p class="hero-subtitle">Grado en Ingeniería Multimedia | Universidad de Alicante</p>
+            <p class="hero-description">
+                Colección de proyectos desarrollados en las asignaturas de <strong>Simulación</strong> 
+                y <strong>Técnicas Procedurales de Animación</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section id="proyectos" class="projects-section">
+        <div class="section-container">
+            <h2 class="section-title">Proyectos</h2>
+            <p class="section-description">
+                Explora los trabajos realizados en cada asignatura
+            </p>
+            
+            <div class="projects-grid">
+                <!-- Proyecto Simulación -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3 class="project-title">Simulación</h3>
+                    <p class="project-description">
+                        Proyectos desarrollados en la asignatura de Simulación. Incluye integradores numéricos, 
+                        sistemas de partículas, simulación de sólidos rígidos, objetos deformables y simulación de fluidos.
+                    </p>
+                    <div class="project-topics">
+                        <span class="topic-tag">Integradores Numéricos</span>
+                        <span class="topic-tag">Sistemas de Partículas</span>
+                        <span class="topic-tag">Sólidos Deformables</span>
+                        <span class="topic-tag">Física</span>
+                    </div>
+                    <a href="simulacion.html" class="project-link">
+                        Ver Proyectos
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Proyecto TPA -->
+                <div class="project-card project-card-disabled">
+                    <div class="project-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="project-title">Técnicas Procedurales de Animación</h3>
+                    <p class="project-description">
+                        Proyectos de la asignatura de Técnicas Procedurales de Animación (TPA). 
+                        Contenido en desarrollo.
+                    </p>
+                    <div class="project-topics">
+                        <span class="topic-tag">Animación Procedimental</span>
+                        <span class="topic-tag">Gráficos 3D</span>
+                        <span class="topic-tag">Modelado</span>
+                    </div>
+                    <a href="tpa.html" class="project-link">
+                        Próximamente
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">Acerca de</h2>
+            <div class="about-content">
+                <p>
+                    Este portfolio académico recopila los proyectos y trabajos prácticos realizados 
+                    durante el tercer curso del <strong>Grado en Ingeniería Multimedia</strong> 
+                    en la Universidad de Alicante.
+                </p>
+                <p>
+                    Los proyectos abarcan desde la simulación física de sistemas complejos hasta 
+                    técnicas avanzadas de animación procedimental, demostrando la aplicación práctica 
+                    de conceptos matemáticos y computacionales en entornos multimedia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2024 Luis Planella Hernandez | Grado en Ingeniería Multimedia</p>
+    </footer>
+
+</body>
+</html>
