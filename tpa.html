@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Técnicas Procedurales de Animación | Portfolio</title>
+    <title>TPA - Práctica 1: Agentes Autónomos | Portfolio</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./tpa-styles.css">
 </head>
 <body>
     
@@ -24,23 +25,318 @@
 
     <!-- Hero Section -->
     <header class="page-header">
-        <h1>Técnicas Procedurales de Animación</h1>
-        <p>Proyectos de la asignatura TPA - 3.º Multimedia</p>
+        <h1>Práctica 1: Agentes Autónomos</h1>
+        <p>Steering Behaviours y Navegación Inteligente</p>
     </header>
 
     <!-- Main Content -->
-    <main class="tpa-content">
-        <section class="coming-soon">
-            <div class="coming-soon-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-            </div>
-            <h2>Contenido en Desarrollo</h2>
-            <p>Los proyectos de Técnicas Procedurales de Animación estarán disponibles próximamente.</p>
-            <a href="index.html" class="btn-back">Volver al Inicio</a>
+    <main class="practice-content">
+        
+        <!-- Práctica 1 Header -->
+        <div style="background: linear-gradient(135deg, #e7f3f8 0%, #f0f8ff 100%); border-left: 5px solid var(--secondary-color); padding: 2rem 2.5rem; border-radius: 12px; margin-bottom: 3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 700;">
+                Práctica 1: Agentes Autónomos y Steering Behaviours
+            </h1>
+            <p style="color: var(--text-light); font-size: 1.1rem; margin: 0;">
+                Implementación y análisis de comportamientos de navegación autónoma, simulación de Boids y dinámica de peatones
+            </p>
+        </div>
+        
+        <!-- Introducción -->
+        <section class="practice-intro">
+            <h2>Agentes Autónomos: La Base de la Animación Procedural</h2>
+            <p>
+                En el mundo de la animación procedural y la simulación, los <strong>agentes autónomos</strong> 
+                representan entidades capaces de tomar decisiones independientes sobre su movimiento y comportamiento. 
+                A diferencia de una animación predefinida, estos agentes responden dinámicamente a su entorno, 
+                creando movimientos orgánicos y realistas sin necesidad de programar cada acción específicamente.
+            </p>
+            <p>
+                Este concepto, popularizado por <strong>Craig Reynolds</strong> en 1987 y ampliamente difundido por 
+                <strong>Daniel Shiffman</strong> en su obra <em>The Nature of Code</em>, revolucionó la forma en que 
+                simulamos comportamientos complejos en computación gráfica, desde bandadas de pájaros hasta multitudes 
+                en videojuegos.
+            </p>
         </section>
+
+        <!-- Steering Behaviours -->
+        <section class="practice-section">
+            <h3>Steering Behaviours: La Mecánica del Movimiento</h3>
+            <p>
+                Los <strong>Steering Behaviours</strong> (comportamientos de dirección) son el corazón de los agentes 
+                autónomos. Reynolds propuso una elegante fórmula que permite a cualquier agente calcular cómo debe 
+                ajustar su movimiento para alcanzar un objetivo:
+            </p>
+            
+            <div class="formula-box">
+                <code>steering = desired - velocity</code>
+            </div>
+
+            <p>
+                Esta simple ecuación vectorial es sorprendentemente poderosa. El vector <strong>desired</strong> 
+                representa la dirección ideal hacia donde el agente quiere ir, mientras que <strong>velocity</strong> 
+                es su movimiento actual. La diferencia entre ambos nos da la fuerza de dirección necesaria para 
+                reorientar al agente hacia su objetivo.
+            </p>
+
+            <!-- Diagrama Steering -->
+            <div class="image-container">
+                <img src="images/desired.png" alt="Diagrama de Steering: Desired - Velocity" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Figura 1: Representación vectorial de la fórmula de steering
+                </p>
+            </div>
+        </section>
+
+        <!-- Los 10 Comportamientos -->
+        <section class="practice-section">
+            <h3>Los 10 Comportamientos Fundamentales</h3>
+            <p>
+                A partir de esta fórmula base, Reynolds identificó una serie de comportamientos que, combinados, 
+                pueden generar movimientos complejos y realistas. En esta práctica se implementaron los siguientes 
+                comportamientos fundamentales:
+            </p>
+
+            <div class="behaviors-list">
+                <div class="behavior-item"><strong>Seek</strong> - Buscar un objetivo</div>
+                <div class="behavior-item"><strong>Flee</strong> - Huir de un punto</div>
+                <div class="behavior-item"><strong>Arrive</strong> - Llegar suavemente</div>
+                <div class="behavior-item"><strong>Wander</strong> - Vagar aleatoriamente</div>
+                <div class="behavior-item"><strong>Path Following</strong> - Seguir un camino</div>
+                <div class="behavior-item"><strong>Obstacle Avoidance</strong> - Evitar obstáculos</div>
+                <div class="behavior-item"><strong>Separation</strong> - Mantener distancia</div>
+                <div class="behavior-item"><strong>Alignment</strong> - Alinearse con vecinos</div>
+                <div class="behavior-item"><strong>Cohesion</strong> - Mantenerse agrupado</div>
+                <div class="behavior-item"><strong>Boundary</strong> - Respetar límites</div>
+            </div>
+
+            <p>
+                Los tres últimos comportamientos (Separation, Alignment y Cohesion) forman el famoso algoritmo 
+                <strong>Boids</strong>, capaz de simular el movimiento de bandadas de aves o bancos de peces con 
+                solo tres reglas simples.
+            </p>
+        </section>
+
+        <!-- Implementación -->
+        <section class="practice-section">
+            <h3>Implementación y Demostración</h3>
+            <p>
+                La implementación práctica de estos comportamientos permite observar cómo agentes simples pueden 
+                generar movimientos sorprendentemente complejos y naturales. Cada comportamiento se puede activar 
+                individualmente para estudiar sus características, o combinarse para crear sistemas más sofisticados.
+            </p>
+
+            <!-- Video demostración -->
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        src="https://www.youtube.com/embed/eMNsaQbjR2c" 
+                        title="Demostración de los 10 Steering Behaviours" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Video 1: Demostración interactiva de los 10 steering behaviours implementados
+                </p>
+            </div>
+
+            <p>
+                La simulación desarrollada en Processing permite interactuar en tiempo real con los agentes, 
+                cambiando entre diferentes comportamientos y observando cómo responden a obstáculos, objetivos 
+                y otros agentes en el entorno.
+            </p>
+        </section>
+
+        <!-- Aplicaciones -->
+        <section class="practice-section">
+            <h3>Aplicaciones en Boids y Simulación de Peatones</h3>
+            <p>
+                Los steering behaviours son la base tanto para la simulación de <strong>Boids</strong> (comportamiento 
+                de bandadas) como para sistemas más complejos como la <strong>simulación de peatones</strong>. Mientras 
+                que Boids utiliza cohesión, alineación y separación para crear movimientos de grupo coordinados, la 
+                simulación de peatones extiende estos conceptos incorporando física de multitudes y validación con 
+                datos empíricos.
+            </p>
+            <p>
+                Ambos sistemas demuestran el poder de los agentes autónomos: reglas simples a nivel individual pueden 
+                generar comportamientos emergentes complejos a nivel grupal, sin necesidad de un control centralizado.
+            </p>
+        </section>
+
+        <!-- Simulación de Peatones -->
+        <section class="practice-section">
+            <h3>Simulación de Peatones en Multitudes</h3>
+            <p>
+                La simulación de peatones utiliza el concepto de agentes autónomos para imitar el comportamiento de 
+                personas en multitudes, intentando reproducir su dinámica en un espacio 2D. Esta implementación se 
+                basa en <strong>cuatro reglas fundamentales</strong> que gobiernan el movimiento de cada peatón:
+            </p>
+
+            <div class="behaviors-list" style="grid-template-columns: 1fr;">
+                <div class="behavior-item"><strong>1. Reducción de velocidad</strong> al aproximarse a otros peatones (basado en densidad local)</div>
+                <div class="behavior-item"><strong>2. Evitación de obstáculos</strong> y resolución de colisiones</div>
+                <div class="behavior-item"><strong>3. Respeto de límites</strong> (paredes y bordes del entorno)</div>
+                <div class="behavior-item"><strong>4. Wandering</strong> (movimiento errático para mayor realismo)</div>
+            </div>
+
+            <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">
+                El Diagrama Fundamental de Dinámica de Peatones (DFDP)
+            </h4>
+            <p>
+                El rendimiento de esta simulación se evalúa mediante el <strong>Diagrama Fundamental de Dinámica de 
+                Peatones (DFDP)</strong>, comparando los resultados con la fórmula empírica de <strong>Ulrich Weidmann</strong>.
+            </p>
+            <p>
+                Weidmann sintetizó una relación velocidad-densidad analizando miles de peatones en estaciones de tren, 
+                centros comerciales y otros espacios públicos. Su fórmula describe cómo los peatones reducen su velocidad 
+                cuando hay más personas a su alrededor:
+            </p>
+
+            <div class="formula-box">
+                <code>v = v₀ × (1 - exp(-γ × (1/ρ - 1/ρₘₐₓ)))</code>
+            </div>
+
+            <p style="margin-top: 1rem;">
+                Donde <strong>v₀ = 1.34 m/s</strong> representa la velocidad libre de caminata, 
+                <strong>γ = 1.913</strong> es el parámetro de ajuste, y <strong>ρₘₐₓ = 5.4 ped/m²</strong> 
+                es la densidad máxima (hombro con hombro). La curva resultante es típicamente exponencial decreciente.
+            </p>
+
+            <!-- Gráfica DFDP -->
+            <div class="image-container">
+                <img src="images/dfdp.png" alt="Diagrama Fundamental de Dinámica de Peatones (DFDP) - Modelo de Weidmann" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Figura 2: Diagrama Fundamental de Dinámica de Peatones según Weidmann
+                </p>
+            </div>
+
+            <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">
+                Arquitectura del Sistema
+            </h4>
+            <p>
+                La implementación combina los steering behaviours de Reynolds con el modelo de densidad de Weidmann. 
+                El sistema calcula la densidad local, ajusta la velocidad deseada según el DFDP, y aplica fuerzas 
+                ponderadas para steering, colisiones y límites.
+            </p>
+
+            <!-- Diagrama de arquitectura -->
+            <div class="image-container">
+                <img src="images/arquitectura.png" alt="Diagrama de arquitectura del sistema de simulación de peatones" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Figura 3: Arquitectura del sistema - Integración de Reynolds y Weidmann
+                </p>
+            </div>
+
+            <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">
+                Demostración de la Simulación
+            </h4>
+
+            <!-- Video simulación peatones -->
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        src="https://www.youtube.com/embed/0GXqNeRLDmY" 
+                        title="Demostración de simulación de peatones" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Video 2: Simulación de peatones con validación del DFDP
+                </p>
+            </div>
+        </section>
+
+        <!-- Simulación Boids -->
+        <section class="practice-section">
+            <h3>Boids: Simulación de Bandadas</h3>
+            <p>
+                Los <strong>Boids</strong> son agentes autónomos que simulan el comportamiento de bandadas de aves 
+                o bancos de peces. Desarrollados por Craig Reynolds en 1987, demuestran cómo comportamientos complejos 
+                emergen de solo <strong>tres reglas simples</strong>:
+            </p>
+
+            <div class="behaviors-list">
+                <div class="behavior-item"><strong>Separation</strong> - Evitar apiñamiento con vecinos cercanos</div>
+                <div class="behavior-item"><strong>Alignment</strong> - Moverse en la misma dirección que los vecinos</div>
+                <div class="behavior-item"><strong>Cohesion</strong> - Mantenerse cerca del centro del grupo local</div>
+            </div>
+
+            <p>
+                A diferencia de los peatones, los Boids priorizan el movimiento coordinado del grupo. Sin embargo, 
+                para validar científicamente la simulación, también se implementó el DFDP para comparar su comportamiento 
+                con el modelo de Weidmann y observar las diferencias fundamentales.
+            </p>
+
+            <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">
+                Demostración de la Simulación
+            </h4>
+
+            <!-- Video simulación Boids -->
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        src="https://www.youtube.com/embed/9YUBBjHrQ_E" 
+                        title="Demostración de simulación de Boids" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; font-style: italic;">
+                    Video 3: Simulación de Boids con análisis del DFDP
+                </p>
+            </div>
+        </section>
+
+        <!-- Comparación Pedestrians vs Boids -->
+        <section class="practice-section">
+            <h3>Comparación: Peatones vs Boids</h3>
+            <p>
+                La comparación cuantitativa entre ambas simulaciones revela diferencias fundamentales en su comportamiento. 
+                Mientras que la simulación de peatones reproduce la curva exponencial decreciente del diagrama fundamental 
+                de Weidmann, los Boids muestran un patrón diferente debido a su naturaleza de movimiento en bandada.
+            </p>
+            <p>
+                Esta comparación ilustra por qué es crucial elegir el modelo apropiado según la aplicación: Boids es 
+                ideal para animación de grupos coordinados, mientras que la simulación de peatones es necesaria para 
+                estudios de seguridad, evacuación y planificación urbana.
+            </p>
+
+            <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">
+                Análisis Comparativo de Diagramas Fundamentales
+            </h4>
+
+            <!-- Comparación gráficas lado a lado -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="text-align: center;">
+                    <img src="images/dfdp_peatones.png" alt="DFDP - Simulación de Peatones" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                </div>
+                <div style="text-align: center;">
+                    <img src="images/dfdp_boids.png" alt="DFDP - Simulación de Boids" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+            <p style="text-align: center; color: #666; font-size: 0.9rem; font-style: italic;">
+                Figura 4: Comparación de diagramas fundamentales entre la simulación de peatones (izquierda) 
+                y Boids (derecha), mostrando las diferencias en la relación velocidad-densidad
+            </p>
+        </section>
+
+        <!-- Referencias -->
+        <section class="reference-box">
+            <p><strong>Referencias principales:</strong></p>
+            <p>• Reynolds, C. W. (1987). "Flocks, Herds, and Schools: A Distributed Behavioral Model"</p>
+            <p>• Reynolds, C. W. (1999). "Steering Behaviors for Autonomous Characters"</p>
+            <p>• Shiffman, D. "The Nature of Code" - Capítulo 6: Autonomous Agents</p>
+            <p>• Weidmann, U. (1993). "Transporttechnik der Fussgänger" - ETH Zürich</p>
+        </section>
+
     </main>
 
     <!-- Footer -->

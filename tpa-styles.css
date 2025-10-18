@@ -1,0 +1,134 @@
+/* ==================== TPA SPECIFIC STYLES ==================== */
+
+.practice-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.practice-intro {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.5rem;
+}
+
+.practice-intro h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.practice-intro p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1.2rem;
+}
+
+.practice-section {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.5rem;
+}
+
+.practice-section h3 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.practice-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.media-placeholder {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e9ecef 100%);
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 3rem;
+    text-align: center;
+    margin: 2rem 0;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-placeholder svg {
+    width: 80px;
+    height: 80px;
+    color: #999;
+    margin-bottom: 1rem;
+}
+
+.media-placeholder p {
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.formula-box {
+    background: #f8f9fa;
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+}
+
+.formula-box code {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: 'Courier New', monospace;
+}
+
+.behaviors-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.behavior-item {
+    background: var(--bg-color);
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.reference-box {
+    background: #e7f3f8;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+}
+
+.reference-box p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.reference-box strong {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .behaviors-list {
+        grid-template-columns: 1fr;
+    }
+}
+
